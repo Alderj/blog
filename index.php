@@ -15,10 +15,29 @@
 </head>
 
 <body>
+    <?php
+    if(isset($_POST['nome']))
+    {
+        $nome = addslashes($_POST['nome']);
+        $telefone = addslashes($_POST['telefone']);
+        $email = addslashes($_POST['email']);
+        if(!empty($nome) && !empty($telefone) && !empty($email))
+        {
+            // cadastrar
+            if(!$p->cadastrarPessoa($nome, $telefone, $email))
+            {
+                echo "Email já cadastrado";
+            }
+        } else {
+            echo "Preencha todos os campos";
+        }         
+    }
+
+    ?>
     <div class="container">
         
         <section id="esquerda">
-            <form action="">
+            <form method="POST">
                 <h2>CADASTRAR PESSOA</h2>
                 <label for="nome">Nome:</label>
                 <input type="text" name="nome" id="nome">
@@ -58,8 +77,9 @@
                             <td><a href="">Editar</a><a href="">Excluir</a></td>
             <?php
                         echo "</>";
-                    }
-            
+                    }            
+                } else {
+                    echo "Ainda não há pessoas cadastradas.";
                 }
             ?>  
             </table>
