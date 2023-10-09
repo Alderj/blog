@@ -53,5 +53,25 @@
             $cmd->bindValue(":id", $id);
             $cmd->execute();
         }
+
+        //BUSCAR DADIS DE UMA PESSOA
+        public function buscarDadosPessoa($id)
+        {
+            $res = array();
+            $cmd = $this->pdo->prepare("SELECT * FROM pessoa WHERE id = :id");
+            $cmd->bindValue(":id", $id);
+            $cmd->execute();
+            $res = $cmd->fetch(PDO::FETCH_ASSOC);
+            return $res;
+        }
+
+
+        //ATUALIZAR DADOS DO DB
+        public function atualizarDados()
+        {
+
+
+        }
+
     }
 ?>
